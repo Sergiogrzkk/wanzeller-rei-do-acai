@@ -1,0 +1,11 @@
+# Arquivos locais e dependências opcionais.
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+tmp/

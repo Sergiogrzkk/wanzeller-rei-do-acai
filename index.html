@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#713eb2">
+  <meta name="description" content="Do sertão ao mar, uma aventura brasileira com Wanzeller, o Rei do Açaí. Jogue grátis no navegador.">
+  <title>Wanzeller — O Rei do Açaí</title>
+  <link rel="icon" href="assets/crown.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <a class="brand" href="./" aria-label="Wanzeller, início"><span class="brand-icon"><img src="assets/crown.svg" alt="" width="29" height="29"></span><span>WANZELLER<span class="brand-caption">O REI DO AÇAÍ</span></span></a>
+      <div class="header-right"><span class="edition"><i></i> UMA AVENTURA BRASILEIRA</span><button class="icon-button" id="soundButton" aria-label="Desativar som" title="Ativar ou desativar som">♫</button><button class="icon-button" id="fullscreenButton" aria-label="Abrir tela cheia" title="Tela cheia">⛶</button></div>
+    </header>
+
+    <section class="game-section" aria-label="Jogo Wanzeller, o Rei do Açaí">
+      <div class="stage" id="stage">
+        <canvas id="gameCanvas" tabindex="0" aria-label="Jogo de plataforma. Setas ou A e D para mover; espaço para pular; X para lançar açaí; P para pausar."></canvas>
+        <div class="scene-grain" aria-hidden="true"></div>
+
+        <div class="hud hidden" id="hud">
+          <div class="hud-location"><span class="hud-kicker" id="levelNumber">CAPÍTULO 01</span><strong id="levelName">O coração do sertão</strong></div>
+          <div class="hud-stats"><span id="lives" aria-label="3 vidas">♥ ♥ ♥</span><span class="coin-counter"><span class="mini-berry">●</span><b id="score">0000</b></span><button class="pause-button" id="pauseButton" aria-label="Pausar jogo">Ⅱ</button></div>
+        </div>
+        <div class="level-toast hidden" id="levelToast" aria-live="polite"></div>
+
+        <div class="start-screen" id="startScreen">
+          <div class="intro">
+            <span class="eyebrow"><span>✦</span> PEQUENO FRUTO. GRANDE HERÓI. EM PIXELS.</span>
+            <h1>WANZELLER<span>O REI DO <em>AÇAÍ</em></span></h1>
+            <p class="tagline">Do sertão ao mar.<br>Uma aventura de coração brasileiro.</p>
+            <p class="story">O Profeta sequestrou Thaís. Pé na estrada, coroa na cabeça e açaí na mão: seis fases pelo Brasil para trazer nossa garota de volta!</p>
+            <button class="primary-button" id="playButton"><span class="play-triangle">▶</span> Jogar <span class="button-arrow">→</span></button>
+            <span class="play-note">Grátis, direto no navegador e com muito açaí.</span>
+          </div>
+          <div class="hero-label" aria-hidden="true"><span>100% BRASILEIRO</span><strong>O poder vem<br>da nossa terra.</strong><svg viewBox="0 0 70 40"><path d="M4 5 Q55 -1 53 31 M43 24 L53 34 L62 25"/></svg></div>
+          <div class="chapter-tag"><span class="chapter-dot"></span><span>PRIMEIRA PARADA<strong>O coração do sertão</strong></span><span class="chapter-index">01 / 06</span></div>
+        </div>
+
+        <div class="modal-layer hidden" id="modalLayer">
+          <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+            <span class="modal-icon" id="modalIcon">☀</span><span class="eyebrow" id="modalEyebrow">RESPIRE UM POUQUINHO</span>
+            <h2 id="modalTitle">Pausa para o açaí</h2><p id="modalDescription">Sua aventura espera por você.</p>
+            <div class="result-score hidden" id="resultScore"></div>
+            <button class="primary-button" id="modalPrimary">Continuar <span>→</span></button><button class="text-button" id="modalSecondary">Voltar ao início</button>
+          </section>
+        </div>
+        <section class="dialogue-layer hidden" id="dialogueLayer" role="dialog" aria-modal="true" aria-labelledby="dialogueName" aria-describedby="dialogueText">
+          <div class="dialogue-box">
+            <canvas id="dialoguePortrait" width="128" height="128" aria-hidden="true"></canvas>
+            <div class="dialogue-copy"><div class="dialogue-heading"><strong id="dialogueName">Wanzeller</strong><span id="dialogueCount">01 / 03</span></div><p id="dialogueText" aria-live="polite"></p><div class="dialogue-actions"><button id="dialogueSkip">Pular conversa</button><button id="dialogueNext">Continuar →</button></div><small>ESPAÇO / ENTER para continuar · ESC para pular</small></div>
+          </div>
+        </section>
+        <div class="touch-controls hidden" id="touchControls" aria-label="Controles de toque">
+          <div><button data-control="left" aria-label="Mover para a esquerda">◀</button><button data-control="right" aria-label="Mover para a direita">▶</button></div>
+          <div><button data-control="power" class="touch-power" aria-label="Lançar açaí">✦</button><button data-control="jump" class="touch-jump" aria-label="Pular">↑</button></div>
+        </div>
+      </div>
+      <div class="control-bar"><div class="keyboard-controls"><span><kbd>←</kbd><kbd>→</kbd> ou <kbd>A</kbd><kbd>D</kbd> mover</span><span><kbd class="wide-key">Espaço</kbd> pular</span><span><kbd>X</kbd> poder de açaí</span><span><kbd>P</kbd> pausar</span></div><span class="mobile-hint">Use os botões na tela para mover, pular e lançar açaí.</span><span class="autosave-label"><i></i> Seu recorde fica salvo</span></div>
+    </section>
+
+    <section class="characters" aria-labelledby="charactersTitle">
+      <div class="journey-heading"><div><span class="eyebrow">O ELENCO DA AVENTURA</span><h2 id="charactersTitle">Conheça os personagens.</h2></div></div>
+      <div class="character-cards">
+        <article class="character-card"><canvas class="character-preview" id="characterPreview0" width="200" height="150" aria-label="Wanzeller em pixel art: cachos, coroa e capa roxa"></canvas><div><span>HERÓI JOGÁVEL</span><h3>Wanzeller</h3><p>Mais açaí. Menos problema.</p></div></article>
+        <article class="character-card"><canvas class="character-preview" id="characterPreview1" width="200" height="150" aria-label="Thaís em pixel art: franja, cabelo até os ombros e botas pretas"></canvas><div><span>NOSSA GAROTA</span><h3>Thaís</h3><p>Uma atitude maior que qualquer vilão.</p></div></article>
+        <article class="character-card"><canvas class="character-preview" id="characterPreview2" width="200" height="150" aria-label="O Profeta em pixel art: óculos, cabelos longos e manto azul e branco"></canvas><div><span>VILÃO</span><h3>O Profeta</h3><p>O plano é infalível. Segundo ele.</p></div></article>
+      </div>
+    </section>
+
+    <section class="journey" aria-labelledby="journeyTitle">
+      <div class="journey-heading"><div><span class="eyebrow">SEIS FASES. TRÊS REGIÕES. UMA MISSÃO.</span><h2 id="journeyTitle">Uma jornada pela nossa terra.</h2></div><p>Colecione açaí. Troque uma ideia. Salve Thaís.</p></div>
+      <div class="chapter-cards">
+        <article class="chapter-card active" id="chapter0"><div class="biome-icon desert-icon" aria-hidden="true">☀</div><div><span class="card-kicker">CAPÍTULO 01 <span class="card-status">O COMEÇO</span></span><h3>Sertão</h3><p>Sol no rosto, coragem no peito.</p></div><span class="card-number">01</span></article>
+        <article class="chapter-card" id="chapter1"><div class="biome-icon desert-icon" aria-hidden="true">☀</div><div><span class="card-kicker">CAPÍTULO 02 <span class="card-status">SERTÃO</span></span><h3>Feira do sol rachado</h3><p>O perigo aqui não é só o preço.</p></div><span class="card-number">02</span></article>
+        <article class="chapter-card" id="chapter2"><div class="biome-icon forest-icon" aria-hidden="true">♣</div><div><span class="card-kicker">CAPÍTULO 03 <span class="card-status">AMAZÔNIA</span></span><h3>Caminhos da floresta</h3><p>A casa do nosso superpoder.</p></div><span class="card-number">03</span></article>
+        <article class="chapter-card" id="chapter3"><div class="biome-icon forest-icon" aria-hidden="true">♣</div><div><span class="card-kicker">CAPÍTULO 04 <span class="card-status">AMAZÔNIA</span></span><h3>O igarapé dos atalhos</h3><p>Quem disse que o atalho era fácil?</p></div><span class="card-number">04</span></article>
+        <article class="chapter-card" id="chapter4"><div class="biome-icon coast-icon" aria-hidden="true">≈</div><div><span class="card-kicker">CAPÍTULO 05 <span class="card-status">SANTA CATARINA</span></span><h3>A orla dos ventos</h3><p>Segura a coroa que o sul chegou.</p></div><span class="card-number">05</span></article>
+        <article class="chapter-card" id="chapter5"><div class="biome-icon coast-icon" aria-hidden="true">♛</div><div><span class="card-kicker">CAPÍTULO 06 <span class="card-status">O RESGATE</span></span><h3>O último pôr do sol</h3><p>Thaís e o grande final esperam.</p></div><span class="card-number">06</span></article>
+      </div>
+    </section>
+    <footer><span>Feito de aventura, Brasil e açaí. <span class="footer-heart">♥</span></span><span>RECORDE <b id="bestScore">0000</b><span class="footer-dot">·</span> SEM PRESSA. DIVIRTA-SE.</span></footer>
+  </main>
+  <script src="assets/pixel-art.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
